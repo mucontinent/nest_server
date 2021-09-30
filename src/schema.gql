@@ -1,0 +1,82 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Int!
+  email: String!
+  password: String!
+  username: String!
+}
+
+type GetUsersInput {
+  id: Int!
+  email: String!
+  username: String!
+}
+
+type AuthToken {
+  token: String!
+}
+
+type MonitoringKeys {
+  id: Float!
+  city: String!
+  protocol: String!
+  ip_address: String!
+  username_credentials: String!
+  password_credentials: String!
+  dns: String!
+  port: Int
+}
+
+type Query {
+  user(email: String!): User!
+  profile: GetUsersInput!
+  findMonitoringKey(searchText: String!): [MonitoringKeys!]!
+}
+
+type Mutation {
+  login(credentials: NewUserInput!): AuthToken!
+  createUser(data: NewUserInput!): User!
+  createMonitoringKey(data: MonitoringKeysDTO!): MonitoringKeys!
+  updateMonitoringKey(newData: MonitoringKeysUpdateDTO!, id: Float!): MonitoringKeys!
+}
+
+input NewUserInput {
+  email: String!
+  password: String!
+}
+
+input MonitoringKeysDTO {
+  city: City!
+  protocol: Protocol!
+  ip_address: String!
+  username_credentials: String!
+  password_credentials: String!
+  dns: String!
+  port: Int = 0
+}
+
+enum City {
+  CULIACAN
+  CDMX
+  MONTERREY
+}
+
+enum Protocol {
+  SSH
+  WEB
+  ANOTHER
+}
+
+input MonitoringKeysUpdateDTO {
+  id: Float
+  city: City
+  protocol: String
+  ip_address: String
+  username_credentials: String
+  password_credentials: String
+  dns: String
+  port: Int
+}
